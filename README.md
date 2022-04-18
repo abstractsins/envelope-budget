@@ -30,11 +30,11 @@ Includes `GET` routes for all envelopes, or specific ones.
 
 to `GET` an individual envelope:
 ```javascript
-'/:envelope'
+/:envelope
 ```
 to `GET` all envelopes, simply `GET` 
 ```javascript
-'/'
+/
 ```
 #### PUT
 Includes `PUT` routes for updating envelope balance.
