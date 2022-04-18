@@ -1,0 +1,183 @@
+/* FONT FAMILY NAMES */
+/* "Akshar", "Volkhov", "Roboto Condensed" */
+
+*, 
+html, 
+body {
+    /* border: 1px solid red; */
+    /* CUSTOM COLORS */
+    --bud-green: rgb(112, 174, 110);
+    --charcoal: rgb(49, 49, 49);
+    --charcoal-2: #36454F;
+    --dark-liver: rgb(72, 60, 70);
+    --inchworm: rgb(190, 238, 98);
+    --ming: rgb(60, 110, 113);
+    --orange-crayola: rgb(244, 116, 59);
+    --orange-burnt: rgb(179, 82, 44);
+    --orange-burnt-2: #833C20;
+    --shadow-color: rgba(42, 42, 42, 0.6);
+    --shadow-b-color: rgba(21, 21, 21, 0.8);
+    /*  END CUSTOM COLORS */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    display: flex;    
+    justify-content: center;
+    padding: 10px 30px;
+    margin: 30px 0 15px 0;
+}
+h1.title {
+    font-family: "Akshar", Arial, Helvetica, sans-serif;
+    font-size: 3.5em;
+    letter-spacing: 0.10ch;
+    font-weight: 800;
+}
+h2 {
+    font-family: "Akshar", Arial, Helvetica, sans-serif;
+    /* font-family: "Volkhov", Georgia, 'Times New Roman', Times, serif; */
+    font-size: 1.75em;
+}
+
+h2#income {
+    padding: 10px;
+    margin: 10px;
+}
+
+.api {
+    background-color: lightblue;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 70%;
+}
+
+.income {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 30px;
+    /* width: 45%; */
+    margin-top: 10px;
+}
+
+input {
+    background-color: whitesmoke;
+    font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+    display: flex;
+    border-radius: 10px;
+    border: 3px solid black;
+    font-size: 2em;
+    padding: 0px 12px 0px 25px;
+    /* width: 20%;  */
+    width: 175px;
+    letter-spacing: 0.15ch;
+}
+
+input:focus {
+    /* border: 3px dashed black; */
+    background-color: beige;
+}
+
+.envelopes {
+    background-color: antiquewhite;
+    display: flex;
+    border-radius: 15px;
+    flex-flow: row wrap;
+    width: 70%;
+    min-height: 250px;
+    margin: 30px 0 10px 0;
+}
+
+.operations {
+    display: none;
+}
+.operations.active {
+    background-color: var(--bud-green);
+    display: flex;
+    border-radius: 15px;
+    width: 70%;
+    height: 150px;
+    margin: 10px;       
+}
+
+.creation {
+    background-color: var(--dark-liver);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    border-radius: 15px;
+    /* width: fit-content; */
+    margin: 10px 0 30px 0;   
+    padding: 0 15px 15px 15px;
+}
+
+h2#create {
+    color: whitesmoke;
+}
+
+.create-ops {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.input-area {
+    background-color: rgb(162, 186, 210);
+    display: flex;
+    flex-flow: column;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 15px;
+    width: fit-content;
+}
+
+.input-area input {
+    font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+    font-size: 1.25em;
+    letter-spacing: 0.15ch;
+    padding: 5px 10px;
+}
+
+h3 {
+    font-family: "Volkhov", Georgia, 'Times New Roman', Times, serif;
+    margin: 5px 0;
+}
+h4 {
+    font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+    size: 0.5em;
+    color: whitesmoke;
+    font-weight: 200;
+    /* letter-spacing: 0.15ch; */
+}
+
+button#create {
+    background-color: var(--bud-green);
+    font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px;
+    font-size: 1.25em;
+}
+
+button#create:hover {
+    cursor: pointer;
+    background-color: var(--inchworm);
+}
+
+button#create:active {
+    background-color: whitesmoke;
+}
+
+
+/* BREAK at 910px */

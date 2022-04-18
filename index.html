@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="style.css" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">        
+    
+    <!-- TITLE -->
+    <title>Envelope Budgeting API</title>
+
+</head>
+<body>
+    
+    <!-- API -->
+    <div class="api">
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1 class="title">Envelope Budget API</h1>
+        </div>
+
+        <!-- INCOME INPUT SECTION -->
+        <div class="income">
+            <h2 id="income">Monthly income:</h2>
+            <!-- KEYBOARD INPUT -->
+            <input id="input" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+        </div>
+
+        <!-- ENVELOPE FLEX BOX -->
+        <div class="envelopes"></div>
+
+        <!-- ENVELOPE OPERATIONS -->
+        <div class="operations"></div>
+
+        <!-- CREATE ENVELOPE -->
+        <div class="creation">
+            <div class="header">
+                <h2 id="create">Create Envelope</h2>
+            </div>
+            <div class="create-ops">
+                <!-- New Envelope Name -->
+                <div class="input-area">
+                    <h3>Name:</h3>
+                    <input id="envelope-name" type="text" maxlength="15" placeholder="e.g. Rent...">
+                </div>
+                <!-- New Envelope Starting Value -->
+                <div class="input-area">
+                    <h3>Balance:</h3>
+                    <input id="starting-balance" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+                </div>
+            </div>
+            <!-- FOOTER -->
+            <div class="little-foot">
+                <h4>Starting balance will be $0 if not specified</h4>
+            </div>
+            <div class="submit-new">
+                <button id="create" onclick="create()">CREATE</button>
+            </div>
+        </div>
+
+    </div> 
+    
+    <!-- JQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- JAVASCRIPT -->
+    <script src="main.js"></script>
+    
+</body>
+</html>

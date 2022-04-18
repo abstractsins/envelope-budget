@@ -56,7 +56,16 @@ and then the balance in the 'utilities' envelope would return 40. LEt's also say
 The new balance of 'utilities' would return 60.
 
 #### TRANSFER BALANCE
-Includes a special function which will transfer a specified value from one envelope to another. This uses a `POST` route, but takes different parameters.
+Includes a special function which will transfer a specified value from one envelope to another. This uses a `POST` route, but takes additional parameters. It is accessed like so:
+```javascript
+'transfer/:from/:to/?amount=number'
+```
+example:
+The balance of `groceries` is 300. The balance of `dining` is 150. After this `POST` request...
+```javascript
+'transfer/groceries/dining/?amount=100'
+```
+The balance of `groceries` is now 200 and the balance of `dining` is now 250. It sends back an object with both updated envelopes.
 
 #### DELETE
 Includes a `DELETE` route for scrapping an envelope. Simply specify the category in the route:
