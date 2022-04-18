@@ -42,11 +42,6 @@ envelopeRouter.param('action', (req,res,next,action)=>{
     next();
 })
 
-app.get('/', (req,res,next)=>{
-    res.status(200).send('Hello world!')
-    console.log('\ntest: hello world!')
-})
-
 // Listen in on server
 app.listen(PORT, function(err){
     if (err) console.log("Error in server setup");    
@@ -71,9 +66,8 @@ envelopeRouter.put('/:category/:action/', (req,res,next)=>{
     let action = req.action;
     let amount = req.query.amount;
     let updated = update(action, category, amount);
-    console.log(updated)
     if (updated) {
-        res.status(204).send(updated);
+        res.send(updated);
         console.log(`\n*****Envelope updated - ${action} ${req.category}: ${req.query.amount}`)
     } else {
         res.status(404).send('something went wrong')
@@ -91,6 +85,17 @@ envelopeRouter.post('/', (req,res,next)=>{
     } else {
         res.status(404).send();
     }
+})
+// TRANSFER
+envelopeRouter.post('/transfer/:from/:to', (req,res,next)=>{
+    let from = req.params.from;
+    let to = req.params.to;
+    let amount = req.query.amount;
+    let updatedFrom = update('debit', from, amount);
+    let updatedTo = update('credit', to, amount);
+    let returnArr = [updatedFrom, updatedTo]
+    console.log(`\n*****Transfered ${amount} from ${from} to ${to}`);
+    res.status(200).send(returnArr)
 })
 
 // DELETE 

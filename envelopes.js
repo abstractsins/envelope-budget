@@ -8,9 +8,9 @@ const getAll = () => {
 }
 // Function to set a budget amount;
 const setEnvelope = (category, amount=0) => {
-    if (typeof category!=='string' || typeof amount!=='number') return false;
-    else Envelopes[category] = amount;
-    return true;
+    let returnObj = {};
+    Envelopes[category] = amount;
+    return {[category]: amount};
 };
 // Function to get an envelope balance;
 const getEnvelope = category => {
