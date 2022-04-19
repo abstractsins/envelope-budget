@@ -2,9 +2,18 @@
  * TODO
  * *Add dollar sign to input
  * *add create() function
- * */ 
+ * */
 
 /* INPUT VALIDATION */
+// Function for adding "$" at beginning of number input when clicking on field
+const $moneys = $('.money');
+$('.money').on('focus', function(){
+    $(this).val('$');
+})
+// Function for removing "$" from beginning of number when clicking off of field
+$('.money').on('blur', function(){
+    if ($(this).val()==='$') $(this).val('');
+})
 // Allowing only numbers and decimal point as input
 function isNumberKey(evt) {
     let charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -93,7 +102,7 @@ let $categories = $('.sample-envelope').each(function(){
 });
 
 const accountSelect = (account, direction) => {
-    console.log(account,direction)
+    // console.log(account,direction)
     if (direction==='to') {
         $('#to-dropbtn').html(account);
         $('#to-dropbtn').css("background-color", "whitesmoke")
@@ -111,10 +120,15 @@ const accountSelect = (account, direction) => {
 }
 /* END --DROPDOWN CATEGORIES */
 
-/* API */
-const url = 'https://44.203.14.71:3000/';
-const serverData = fetch(url).then(res=>res.json()).then(obj=>{
-    return obj.body;
-}).catch(err=>{console.error('Something went wrong getting the information!');console.error(err)})
+/**
+ ** EXPERIMENTAL SECTION
+ */
+ 
+ /* API */
+//  const url = 'http://44.203.14.71:3000/';
+//  const serverData = fetch(url).then(res=>res.json()).then(obj=>{
+//      return obj.body;
+//     }).catch(err=>{console.error('Something went wrong getting the information!');console.error(err)})
 /* END -- API */
 
+// 

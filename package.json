@@ -11,5 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "morgan": "^1.10.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abstractsins/envelope-budget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abstractsins/envelope-budget/issues"
+  },
+  "homepage": "https://github.com/abstractsins/envelope-budget#readme"
 }

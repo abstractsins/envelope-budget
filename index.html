@@ -30,7 +30,7 @@
         <div class="income">
             <h2 id="income">Monthly income:</h2>
             <!-- KEYBOARD INPUT -->
-            <input id="input" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+            <input class="money" id="income-input" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
         </div>
 
         <!-- ENVELOPE FLEX BOX -->
@@ -76,19 +76,19 @@
                     <!-- CREDIT TRANSACTIONS -->
                     <div class="action-state" id="credit">
                         <h3>Amount:</h3>
-                        <input id="credit-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+                        <input class="money" id="credit-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
                         <button id="credit-submit" onclick="credit()">SUBMIT</button>
                     </div>
                     <!-- DEBIT TRANSACTIONS -->
                     <div class="action-state" id="debit">
                         <h3>Amount:</h3>
-                        <input id="debit-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+                        <input class="money" id="debit-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
                         <button id="debit-submit" onclick="debit()">SUBMIT</button>
                     </div>
                     <!-- TRANSFER TRANSACTIONS -->
                     <div class="action-state" id="transfer">
                         <h3>Amount:</h3>
-                        <input id="transfer-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+                        <input class="money" id="transfer-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
                         <div class="to-from">
                             <!-- FROM SECTION -->
                             <div class="to-from-select">
@@ -135,7 +135,7 @@
                 <!-- New Envelope Starting Value -->
                 <div class="input-area">
                     <h3>Balance:</h3>
-                    <input id="starting-balance" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+                    <input class="money" id="starting-balance" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
                 </div>
             </div>
             <!-- FOOTER -->

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const envelopeRouter = express.Router();
+const cors = require('cors');
 // const bodyParser = require('body-parser')
 
 const {    
@@ -18,6 +19,8 @@ const { redirect } = require('express/lib/response');
 const PORT = process.env.PORT || 3000;
 
 // MIDDLEWARE
+// Cors
+app.use(cors());
 // Morgan logging
 app.use(morgan('tiny'))
 // json body parsing //*not sure i need this
