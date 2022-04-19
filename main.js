@@ -111,3 +111,10 @@ const accountSelect = (account, direction) => {
 }
 /* END --DROPDOWN CATEGORIES */
 
+/* API */
+const url = 'https://44.203.14.71:3000/';
+const serverData = fetch(url).then(res=>res.json()).then(obj=>{
+    return obj.body;
+}).catch(err=>{console.error('Something went wrong getting the information!');console.error(err)})
+/* END -- API */
+
