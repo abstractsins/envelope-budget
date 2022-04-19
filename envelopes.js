@@ -43,6 +43,13 @@ module.exports = {
     update
 };
 
+// SAMPLE ENVELOPES - comment or uncomment this section
+setEnvelope('rent', 500)
+setEnvelope('gas', 50)
+setEnvelope('electric', 40)
+setEnvelope('internet', 60)
+setEnvelope('phone', 55)
+
 /* THIS SPACE INTENTIONALLY LEFT BLANK
 *
 *

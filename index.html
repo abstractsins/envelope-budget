@@ -11,8 +11,7 @@
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">        
-    
+    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">    
     <!-- TITLE -->
     <title>Envelope Budgeting API</title>
 
@@ -35,10 +34,92 @@
         </div>
 
         <!-- ENVELOPE FLEX BOX -->
-        <div class="envelopes"></div>
+        <div class="envelopes">
+            <div class="envelopes-header">
+                <h2>Budget Categories</h2>
+            </div>
+            <div class="envelope-selection-area">
+                <!-- * Sample envelope balances - comment this out when API is live -->
+                <div class="sample-envelope" onclick="clickEnvelope('Cable')">Cable</div>
+                <div class="sample-envelope" onclick="clickEnvelope('Electric')">Electric</div>
+                <div class="sample-envelope" onclick="clickEnvelope('Phone')">Phone</div>
+                <div class="sample-envelope" onclick="clickEnvelope('Rent')">Rent</div>
+                <div class="sample-envelope" onclick="clickEnvelope('Rent')">Car</div>
+                <div class="sample-envelope" onclick="clickEnvelope('Rent')">Water</div>
+                <div class="sample-envelope" onclick="clickEnvelope('Rent')">Gas</div>
+            </div>
+        </div>
 
         <!-- ENVELOPE OPERATIONS -->
-        <div class="operations"></div>
+        <div class="operations">
+            <!-- Header -->
+            <div class="header" id="ops-header">
+                <h2 id="ops-header-category"></h2>
+                <div class="ops-balance-view">
+                    <h2 id="ops-balance">Available: </h2>                    
+                </div>
+            </div>
+            <!-- Body -->
+            <div class="ops-body">
+                <div class="ops-left">
+                    <div class="actions-header">
+                        <h3 id="ops-left-title">Transactions:</h3>
+                    </div>
+                    <ul class="actions">
+                        <li class="action group1" id="credit-btn" onclick="modeSelect('credit')">Credit</li>
+                        <li class="action group1" id="debit-btn" onclick="modeSelect('debit')">Debit</li>
+                        <li class="action group2" id="transfer-btn" onclick="modeSelect('transfer')">Transfer</li>
+                        <li class="action group3" id="delete-btn" onclick="modeSelect('delete')">Delete</li>
+                    </ul>
+                </div>
+                <div class="ops-right">
+                    <!-- CREDIT TRANSACTIONS -->
+                    <div class="action-state" id="credit">
+                        <h3>Amount:</h3>
+                        <input id="credit-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+                        <button id="credit-submit" onclick="credit()">SUBMIT</button>
+                    </div>
+                    <!-- DEBIT TRANSACTIONS -->
+                    <div class="action-state" id="debit">
+                        <h3>Amount:</h3>
+                        <input id="debit-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+                        <button id="debit-submit" onclick="debit()">SUBMIT</button>
+                    </div>
+                    <!-- TRANSFER TRANSACTIONS -->
+                    <div class="action-state" id="transfer">
+                        <h3>Amount:</h3>
+                        <input id="transfer-amount" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+                        <div class="to-from">
+                            <!-- FROM SECTION -->
+                            <div class="to-from-select">
+                                <!-- TRANSFERS DROPDOWN -->
+                                <div class="dropdown" id="from">
+                                    <button class="dropbtn" id="from-dropbtn">Select catagory</button>
+                                    <div class="dropdown-content" id="from-dropdown"></div>
+                                </div>  
+                            </div>
+                            <div class="arrow">
+                                <span class="symbol">→</span>
+                            </div>
+                            <!-- TO SECTION -->
+                            <div class="to-from-select">
+                                <!-- TRANSFERS DROPDOWN -->
+                                <div class="dropdown" id="to">
+                                    <button class="dropbtn" id="to-dropbtn">Select catagory</button>
+                                    <div class="dropdown-content" id="to-dropdown"></div>
+                                </div>                                
+                            </div>
+                        </div>
+                        <button id="transfer-submit" onclick="transfer()">SUBMIT</button>
+                    </div>
+                    <!-- DELETE TRANSACTIONS -->
+                    <div class="action-state" id="delete">
+                        <p>Are you sure you want to delete this envelope?</p>
+                        <button id="delete-submit" onclick="deleteEnvelope()">SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- CREATE ENVELOPE -->
         <div class="creation">
@@ -60,6 +141,7 @@
             <!-- FOOTER -->
             <div class="little-foot">
                 <h4>Starting balance will be $0 if not specified</h4>
+                <h4>Duplicate names will be overwritten</h4>
             </div>
             <div class="submit-new">
                 <button id="create" onclick="create()">CREATE</button>
