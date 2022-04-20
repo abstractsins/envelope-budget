@@ -92,8 +92,8 @@ const debit = async() => {
 // POST transfer between envelopes
 const transfer = async() => {
     let amount = Number($('#transfer-amount').val().split('$').join(''))
-    let $from = $('#from-dropbtn').text().toLowerCase();
-    let $to = $('#to-dropbtn').text().toLowerCase();
+    let $from = $('#from-dropbtn').text();
+    let $to = $('#to-dropbtn').text();
     await fetch(url+'transfer/'+$from+'/'+$to+'/?amount='+amount, {
         method: 'POST',
     })
