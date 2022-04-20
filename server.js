@@ -79,8 +79,10 @@ envelopeRouter.put('/:category/:action/', (req,res,next)=>{
 
 // POST
 envelopeRouter.post('/', (req,res,next)=>{
-    let category = req.body.envelope;
-    let amount = req.body.amount;
+    // let category = req.body.envelope;
+    // let amount = req.body.amount;
+    let category = req.body['envelope'];
+    let amount = req.body['amount'];    
     let newEnvelope = setEnvelope(category, amount);
     if (newEnvelope) {
         res.status(201).send(newEnvelope)
