@@ -29,15 +29,22 @@ body {
 }
 
 body {
+    background-color: var(--charcoal-2);
     display: flex;
     justify-content: center;
 }
 
 .header {
     display: flex;    
+    flex-flow: column;
+    align-items: center;
     justify-content: center;
     padding: 10px 30px;
     margin: 30px 0 15px 0;
+}
+.header h2 {
+    font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
 }
 h1.title {
     font-family: "Akshar", Arial, Helvetica, sans-serif;
@@ -110,7 +117,6 @@ input:focus {
     justify-content: center;
     border-radius: 15px;
     width: 70%;
-    min-height: 250px;
     margin: 30px 0 10px 0;
     padding: 15px;
 }
@@ -195,7 +201,6 @@ input:focus {
 
 .live-balance {
     margin: 10px;
-    padding: 10px;
     font-family: "Roboto Slab", Georgia, 'Times New Roman', Times, serif;
     font-size: 1.5em;
 }
@@ -206,7 +211,7 @@ input:focus {
     flex-flow: column;
     align-items: center;
     border-radius: 15px;
-    /* width: fit-content; */
+    width: 70%;
     margin: 10px 0 30px 0;   
     padding: 0 15px 15px 15px;
 }
@@ -280,7 +285,6 @@ li.action:active, li.action.active {
     background-color: var(--index-card-bg);
     height: 100%;
     padding: 15px;
-    /* margin: 15px; */
     width: 100%;
     border-radius: 0 15px 15px 0;
 }
@@ -328,6 +332,7 @@ li.action:active, li.action.active {
     width: fit-content%;
     flex-flow: column;
     align-items: center;
+    justify-content: center;
     padding: 5px;
     margin: 5px 15px;
 }
@@ -364,12 +369,12 @@ li.action:active, li.action.active {
 .dropbtn {
     background-color: var(--ming);
     color: whitesmoke;
-    padding: 15px;
+    padding: 5px 15px;
     margin-top: 10px;
     font-size: 1.25em;
     font-weight: 400;
     border: 3px solid black;
-    min-width: 200px;
+    /* min-width: 200px; */
     font-family: "Roboto Condensed", sans-serif;
 }
 
@@ -444,6 +449,141 @@ button:active {
 button#delete-submit:active {
     background-color: black;
 }
+
+/* MEDIA QUERIES */
+
+/* 1550px WIDE */
+@media screen and (max-width: 1550px)  {
+    .dropbtn {
+        font-size: 1em;
+        font-weight: 400;
+        padding: 10px 15px;
+        width: 100%;
+    }
+}
+/* END 1550px WIDE*/
+
+/* 1250px WIDE */
+@media screen and (max-width: 1250px)  {
+
+    .api {
+        width: 100%;
+    }
+
+    button {
+        font-size: 1em;
+    }
+
+    .operations.active {
+        padding: 0;
+    }
+
+    .operations h2 {
+        font-size: 1.5em;
+    }
+
+    .to-from-select {
+        /* width: 100%; */
+        margin: 0;
+    }
+    .symbol {
+        font-size: 2em;
+    }
+}
+/* END 1250px WIDE*/
+
+/* 750px WIDE */
+@media screen and (max-width: 750px)  {
+
+    .envelopes {
+        width: 80%;
+    }
+
+    .sample-envelope {
+        width: 120px;
+        height: 60px;
+        font-size: 1.25em;
+
+    }
+
+    .create-ops {
+        flex-flow: column;
+    }
+
+    .creation {
+        width: 80%;
+    }
+
+    .ops-body {
+        flex-flow: column;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .operations.active {
+        height: 550px;
+        width: 80%;
+        padding-bottom: 20px;
+    }
+    .ops-right {
+        border-radius: 0px 0px 15px 15px;
+    }
+
+    li.action {
+        width: fit-content;
+        font-size: 1em;
+        margin: 0 5px;
+    }
+    ul.actions {
+        flex-flow: row;
+        height: 45%;
+        justify-content: space-between;
+    }
+
+    .ops-left {
+        height: unset;
+        padding: 10px;
+        margin: 10px;
+    }
+        
+}
+/* END 750px WIDE*/
+
+/* 620px WIDE */
+@media screen and (max-width: 620px)  {
+    li.action {
+        font-size: 0.8em;
+    }
+}
+/* END 620px WIDE */
+
+/* 565px WIDE */
+@media screen and (max-width: 565px)  {
+    li.action {
+        text-align: center;
+        font-size: 0.6em;
+        width: 60px;
+        padding: 5px;
+    }
+
+    .operations.active {
+        height: 480px;
+    }
+
+    .operations h2 {
+        font-size: 1em;
+    }
+
+    .live-balance {
+        padding: 0;
+    }
+
+    .ops-left {
+        padding: 0;
+    }
+}
+/* END 565px WIDE */
+
 
 /* BREAK at 1430px */
 /* BREAK at 910px */

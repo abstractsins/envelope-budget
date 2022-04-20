@@ -1,6 +1,6 @@
 /**
  * TODO
- * *Add dollar sign to input
+ * *populate envelopes after GET
  * *add create() function
  * */
 
@@ -56,10 +56,10 @@ const clickEnvelope = category => {
     $header.text(category)
     category=category.toLowerCase();
     //* Sample envelope balances - comment this out when API is live
-    if (category==='rent') $balView.append('<span class="live-balance">$1000</span>');
-    else if (category==='cable') $balView.append('<span class="live-balance">$80</span>');
-    else if (category==='phone') $balView.append('<span class="live-balance">$55</span>');
-    else if (category==='electric') $balView.append('<span class="live-balance">$60</span>');
+    // if (category==='rent') $balView.append('<span class="live-balance">$1000</span>');
+    // else if (category==='cable') $balView.append('<span class="live-balance">$80</span>');
+    // else if (category==='phone') $balView.append('<span class="live-balance">$55</span>');
+    // else if (category==='electric') $balView.append('<span class="live-balance">$60</span>');
     // This prevents multiple spans from being added somehow;
     $liveBal.remove()
 }
@@ -125,10 +125,25 @@ const accountSelect = (account, direction) => {
  */
  
  /* API */
-//  const url = 'http://44.203.14.71:3000/';
-//  const serverData = fetch(url).then(res=>res.json()).then(obj=>{
-//      return obj.body;
-//     }).catch(err=>{console.error('Something went wrong getting the information!');console.error(err)})
+
+//  GET ALL
+const url = 'http://44.203.14.71:3000/';
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+      console.log(data)
+      for (key in data) {
+        let keyUp = key.charAt(0).toUpperCase() + key.slice(1);
+        console.log(key, data[key])
+        //   ADD ENVELOPES TO ENVELOPE SELECTION AREA
+        let enevelopeStr = '<div class="sample-envelope" onclick="clickEnvelope(\''+key+'\')">'+keyUp+'</div>'
+        $('.envelope-selection-area').append(enevelopeStr)
+      }
+    })
+  .catch(err=>{
+      console.error('Something went wrong getting the information!');
+      console.error(err)
+    })
 /* END -- API */
 
 // 
