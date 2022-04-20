@@ -3,7 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const envelopeRouter = express.Router();
 const cors = require('cors');
-// const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 
 const {    
     Envelopes,
@@ -24,8 +24,8 @@ app.use(cors());
 // Morgan logging
 app.use(morgan('tiny'))
 // json body parsing //*not sure i need this
-// const jsonParser = bodyParser.json()
-// app.use(jsonParser)
+const jsonParser = bodyParser.json()
+app.use(jsonParser)
 // Router
 app.use('/', envelopeRouter)
 // Param
