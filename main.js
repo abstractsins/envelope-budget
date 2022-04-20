@@ -1,9 +1,118 @@
 /**
  * TODO
- * *populate envelopes after GET
- * *add create() function
+ * * limit to income error
+ * * can't work with a zero balance
+ * * transfer
  * */
 
+/* GLOBAL VARIABLES */
+let selectedEnvelope;
+const url = `http://44.203.14.71:3000/`;
+
+/* API FETCH REQUESTS */
+//  GET all
+const getAll = async() => {
+    $('.envelope-selection-area').empty();
+    await fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        for (key in data) {
+            let keyUp = key.charAt(0).toUpperCase() + key.slice(1);
+            console.log(key, data[key])
+            //   ADD ENVELOPES TO ENVELOPE SELECTION AREA
+            let enevelopeStr = '<div class="sample-envelope" onclick="clickEnvelope(\''+key+'\')">'+keyUp+'</div>'
+            $('.envelope-selection-area').append(enevelopeStr)
+        }
+    })
+    .catch(err=>{
+        console.error('Something went wrong getting the information!');
+        console.error(err)
+    })
+}
+// GET individual envelope
+const findBal = (category) => {
+    fetch(url).then(res=>res.json()).then(data=>{
+            $('.live-balance').text('$'+data[category]);
+        })
+        .catch(err=>{
+            console.error('Something went wrong getting the information!');
+            console.error(err)
+        })
+}
+// POST new envelope
+const create = async() => {
+    let $name = $('#envelope-name').val();
+    // Do not submit without name or balance
+    if (!$name || !$('#starting-balance').val().match(/\d/)) {
+        return
+    } else {
+        let $bal = Number($('#starting-balance').val().split('$').join(''));
+        let data = {};
+        data['envelope']=$name;
+        data['amount']=$bal;
+        console.log(data)
+        ;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        });
+        const content = await response.json();
+        // Clear the input fields after submitting
+        $('input#envelope-name').val('')
+        $('input#starting-balance').val('')
+        // Clear existing envelopes and repopulate with the new one;
+        getAll();
+        return content;
+    }
+}
+// PUT credit envelope
+const credit = async() => {
+    let amount = Number($('#credit-amount').val().split('$').join(''))
+    await fetch(url+selectedEnvelope+'/credit/?amount='+amount, {
+        method: 'PUT',
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
+    $('#credit-amount').val('');
+    findBal(selectedEnvelope);
+}
+// PUT debit envelope
+const debit = async() => {
+    let amount = Number($('#debit-amount').val().split('$').join(''))
+    await fetch(url+selectedEnvelope+'/debit/?amount='+amount, {
+        method: 'PUT',
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
+    $('#debit-amount').val('');
+    findBal(selectedEnvelope);
+}
+// POST transfer between envelopes
+const transfer = async() => {
+    let amount = Number($('#transfer-amount').val().split('$').join(''))
+    let $from = $('#from-dropbtn').text().toLowerCase();
+    let $to = $('#to-dropbtn').text().toLowerCase();
+    await fetch(url+'transfer/'+$from+'/'+$to+'/?amount='+amount, {
+        method: 'POST',
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
+    $('#transfer-amount').val('');
+    findBal(selectedEnvelope);
+}
+// DELETE envelope
+const deleteEnvelope = async() => {
+    await fetch(url+selectedEnvelope, {
+        method: 'DELETE',
+    })
+    .then(res => res.text())
+    .then(res => console.log(res))
+    $('.operations').removeClass('active');
+    getAll();
+}
+/* END -- API FETCH REQUESTS */
 /* INPUT VALIDATION */
 // Function for adding "$" at beginning of number input when clicking on field
 const $moneys = $('.money');
@@ -23,12 +132,9 @@ function isNumberKey(evt) {
 }
 /* END -- INPUT VALIDATION */
 
-/* TRANSACTION FUNCTIONS */
-const create = () => {
-    let $name = $('#envelope-name');
-    let $bal = $('#starting-balance');
-}
+/* GUI FUNCTIONS */
 const clickEnvelope = category => {
+    selectedEnvelope = category;
     // JQuery variables;
     let $ops = $('.operations');
     let $header = $('#ops-header-category');
@@ -44,7 +150,6 @@ const clickEnvelope = category => {
     $credit.val('');
     $debit.val('');
     $transfer.val('');
-    // $transfer.value=''
     // Opening the operations section if it's closed;
     if (!$ops.hasClass('active')) $ops.addClass('active')
     // Closing the operations section if the same button is clicked...
@@ -54,7 +159,10 @@ const clickEnvelope = category => {
     } 
     // Giving the operations section a header of the catagory itself;
     $header.text(category)
-    category=category.toLowerCase();
+    // category=category.toLowerCase();
+    $balView.append('<span class="live-balance">$</span>')
+    findBal(category);
+
     //* Sample envelope balances - comment this out when API is live
     // if (category==='rent') $balView.append('<span class="live-balance">$1000</span>');
     // else if (category==='cable') $balView.append('<span class="live-balance">$80</span>');
@@ -63,11 +171,7 @@ const clickEnvelope = category => {
     // This prevents multiple spans from being added somehow;
     $liveBal.remove()
 }
-const credit = () => {}
-const debit = () => {}
-const transfer = () => {}
-const deleteEnvelope = () => {}
-/* END -- TRANSACTION FUNCTIONS */
+/* END -- GUI FUNCTIONS */
 
 /* MODE RADIO BUTTON FUNCTION */
 const modeSelect = mode => {
@@ -84,6 +188,7 @@ const modeSelect = mode => {
     else if (mode==='transfer'){
         $('.action-state#transfer').addClass('active');
         $('#transfer-btn').addClass('active');
+        menuPopulate();
     }
     else if (mode==='delete'){
         $('.action-state#delete').addClass('active');
@@ -92,14 +197,17 @@ const modeSelect = mode => {
 }
 
 /* DROPDOWN CATEGORIES */
-let $categories = $('.sample-envelope').each(function(){
-    let cat = $(this).text();
-    let inputStr = '';
-    inputStrFrom = '<a onclick="accountSelect(\''+cat+'\', \'from\')">' + cat + '</a>';
-    inputStrTo = '<a onclick="accountSelect(\''+cat+'\', \'to\')">' + cat + '</a>';
-    $('#from-dropdown').append(inputStrFrom);
-    $('#to-dropdown').append(inputStrTo);
-});
+function menuPopulate(){
+    $('#from-dropdown').empty();
+    $('#to-dropdown').empty();
+    $('.sample-envelope').each(function(){
+        let cat = $(this).text();
+        let inputStrFrom = '<a onclick="accountSelect(\''+cat+'\', \'from\')">' + cat + '</a>';
+        let inputStrTo = '<a onclick="accountSelect(\''+cat+'\', \'to\')">' + cat + '</a>';
+        $('#from-dropdown').append(inputStrFrom);
+        $('#to-dropdown').append(inputStrTo);
+    });
+}
 
 const accountSelect = (account, direction) => {
     // console.log(account,direction)
@@ -120,30 +228,50 @@ const accountSelect = (account, direction) => {
 }
 /* END --DROPDOWN CATEGORIES */
 
-/**
- ** EXPERIMENTAL SECTION
- */
- 
- /* API */
+/* EVENT LISTENERS */
+// For pressing enter when transacting
+$('#starting-balance').on("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $('button#create').click();
+    }
+});
+$('#envelope-name').on("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $('button#create').click();
+    }
+});
+$('#credit-amount').on("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $('button#credit-submit').click();
+    }
+});  
+$('#debit-amount').on("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $('button#debit-submit').click();
+    }
+});  
+$('#transfer-amount').on("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $('button#transfer-submit').click();
+    }
+});  
+/* END -- EVENT LISTENERS */
 
-//  GET ALL
-const url = 'http://44.203.14.71:3000/';
-fetch(url)
-  .then(response => response.json())
-  .then(data => {
-      console.log(data)
-      for (key in data) {
-        let keyUp = key.charAt(0).toUpperCase() + key.slice(1);
-        console.log(key, data[key])
-        //   ADD ENVELOPES TO ENVELOPE SELECTION AREA
-        let enevelopeStr = '<div class="sample-envelope" onclick="clickEnvelope(\''+key+'\')">'+keyUp+'</div>'
-        $('.envelope-selection-area').append(enevelopeStr)
-      }
-    })
-  .catch(err=>{
-      console.error('Something went wrong getting the information!');
-      console.error(err)
-    })
-/* END -- API */
+/* FUNCTION CALLS */
+getAll() // for populating envelopes upon entering site
+/* END -- FUNCTION CALLS */
 
-// 
+ /* THIS SPACE INTENTIONALLY LEFT BLANK
+*
+*
+*
+*
+*
+*
+*
+OK */

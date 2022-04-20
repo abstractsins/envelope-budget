@@ -117,11 +117,11 @@ envelopeRouter.delete('/:category', (req,res,next)=>{
 })
 
 // TEST CALLS
-setEnvelope('rent', 1000);
-setEnvelope('electric', 50);
-setEnvelope('internet', 60);
-setEnvelope('groceries', 300);
-setEnvelope('gasoline', 100);
+// setEnvelope('rent', 1000);
+// setEnvelope('electric', 50);
+// setEnvelope('internet', 60);
+// setEnvelope('groceries', 300);
+// setEnvelope('gasoline', 100);
 
 /* THIS SPACE INTENTIONALLY LEFT BLANK
 *

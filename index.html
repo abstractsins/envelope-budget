@@ -22,7 +22,7 @@
     <div class="api">
 
         <!-- HEADER -->
-        <div class="header">
+        <div class="header title">
             <h1 class="title">Envelope Budgeting API</h1>
             <h2>for the truly old school</h2>
         </div>
@@ -36,8 +36,8 @@
 
         <!-- ENVELOPE FLEX BOX -->
         <div class="envelopes">
-            <div class="envelopes-header">
-                <h2>Budget Categories</h2>
+            <div class="envelopes-header header">
+                <h2 id="cats">BUDGET ENVELOPES</h2>
             </div>
             <div class="envelope-selection-area">
                 <!-- * Sample envelope balances - comment this out when API is live -->
@@ -124,7 +124,7 @@
 
         <!-- CREATE ENVELOPE -->
         <div class="creation">
-            <div class="header">
+            <div class="header" id="create-header">
                 <h2 id="create">Create Envelope</h2>
             </div>
             <div class="create-ops">
@@ -141,8 +141,8 @@
             </div>
             <!-- FOOTER -->
             <div class="little-foot">
-                <h4>Starting balance will be $0 if not specified</h4>
-                <h4>Duplicate names will be overwritten</h4>
+                <!-- <h4>Starting balance will be $0 if not specified</h4> -->
+                <!-- <h4>Duplicate names will be overwritten</h4> -->
             </div>
             <div class="submit-new">
                 <button id="create" onclick="create()">CREATE</button>
