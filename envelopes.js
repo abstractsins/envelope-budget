@@ -44,15 +44,15 @@ module.exports = {
 };
 
 // SAMPLE ENVELOPES - comment or uncomment this section
-setEnvelope('rent', 500)
-setEnvelope('gas', 50)
-setEnvelope('electric', 40)
-setEnvelope('internet', 60)
-setEnvelope('phone', 55)
-setEnvelope('water', 35)
-setEnvelope('cable', 85)
-setEnvelope('groceries', 355)
-setEnvelope('beer', 55)
+// setEnvelope('rent', 500)
+// setEnvelope('gas', 50)
+// setEnvelope('electric', 40)
+// setEnvelope('internet', 60)
+// setEnvelope('phone', 55)
+// setEnvelope('water', 35)
+// setEnvelope('cable', 85)
+// setEnvelope('groceries', 355)
+// setEnvelope('beer', 55)
 
 /* THIS SPACE INTENTIONALLY LEFT BLANK
 *
