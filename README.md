@@ -105,6 +105,6 @@ Currently I have not been able to host the front end on github (https) while mak
 *Currently there are a few bugs which can be addressed in the next update:*
 1. Envelopes with a balance of $0 are problematic, whether they were created with a zero balance or as a result of maths. The frontend will still see the envelope but the backend will lose it, resulting in errors.
 2. The total of all envelope balances is not restricted to the specified monthly income. No error will result from exceeding the income value. The income field is currently not connected to any functionality.
-3. As previously mentioned I have not yet been able to either A) keep an AWS server instance always running or B) fix the fact that I can't make regular http requests out of github. Until then, any real testing or demonstration will have to be done locally. You can uncomment the sample entries as {DESCRIBED ELSEWHERE} or create your own within the code. If anyone has advice for hosting a live project with a backend, feel free to contact me.
+3. As previously mentioned I have not yet been able to either A) keep an AWS server instance always running or B) fix the fact that I can't make regular http requests out of github. Until then, any real testing or demonstration will have to be done locally. You can uncomment the sample entries as described above or create your own within the code. If anyone has advice for hosting a live project with a backend, feel free to contact me.
 
 
