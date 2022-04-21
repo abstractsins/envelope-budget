@@ -7,7 +7,7 @@
 
 /* GLOBAL VARIABLES */
 let selectedEnvelope;
-const url = `http://44.203.14.71:3000/`;
+const url = `https://44.203.14.71:443/`;
 
 /* API FETCH REQUESTS */
 //  GET all
