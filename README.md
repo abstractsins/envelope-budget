@@ -17,7 +17,7 @@
 
 The back end is currently hosted on AWS but I currently can not keep the server running for on-demand testing of the live site. Both the front end and back end can be run locally.
 
-A sample set of envelopes is contained in the code {SHOW WHERE}, but commented out. Feel free to uncomment it, or start from scratch and use the `POST` route to start adding envelopes.
+A sample set of envelopes is contained in the code, but commented out. Feel free to uncomment it, or start from scratch and use the `POST` route to start adding envelopes. Sample envelopes can be uncommented either at line 166 in `main.js` or line 119 in `server.js` or line 46 in envelopes.js.
 
 Each route includes friendly console logging for ease of tracing. Morgan is also used as middleware.
 
@@ -103,8 +103,8 @@ Currently I have not been able to host the front end on github (https) while mak
 ## Known Issues: 
 
 *Currently there are a few bugs which can be addressed in the next update:*
-1.Envelopes with a balance of $0 are problematic, whether they were created with a zero balance or as a result of maths. The frontend will still see the envelope but the backend will lose it, resulting in errors.
+1. Envelopes with a balance of $0 are problematic, whether they were created with a zero balance or as a result of maths. The frontend will still see the envelope but the backend will lose it, resulting in errors.
 2. The total of all envelope balances is not restricted to the specified monthly income. No error will result from exceeding the income value. The income field is currently not connected to any functionality.
-3. As previously mentioned I have not yet been able to either 1) keep an AWS server instance always running or 2) fix the fact that I can't make regular http requests out of github. Until then, any real testing or demonstration will have to be done locally. You can uncomment the sample entries as {DESCRIBED ELSEWHERE} or create your own within the code. If anyone has advice for hosting a live project with a backend, feel free to contact me.
+3. As previously mentioned I have not yet been able to either A) keep an AWS server instance always running or B) fix the fact that I can't make regular http requests out of github. Until then, any real testing or demonstration will have to be done locally. You can uncomment the sample entries as {DESCRIBED ELSEWHERE} or create your own within the code. If anyone has advice for hosting a live project with a backend, feel free to contact me.
 
 

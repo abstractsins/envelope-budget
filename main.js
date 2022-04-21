@@ -1,10 +1,3 @@
-/**
- * TODO
- * * limit to income error
- * * can't work with a zero balance
- * * transfer
- * */
-
 /* GLOBAL VARIABLES */
 let selectedEnvelope;
 const url = `http://44.203.225.104:3000/`;
