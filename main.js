@@ -1,6 +1,26 @@
+// TODO
+// * Create transaction log front end
+// * Warning message for budgets exceeding income
+// * Input sanitzing for budget categories
+// * Zero balance bug
+
 /* GLOBAL VARIABLES */
 let selectedEnvelope;
-const url = `http://44.203.225.104:3000/`;
+const url = `http://localhost:3000/`;
+let totalBills = 0;
+
+//Function for adding commas to numbers
+const commify = (input) => {
+    if (typeof input === 'number') input = input.toString();
+    if (input.length > 3) {
+        input = input.split('').reverse();
+        for (let i=0; i<input.length; i+=3) {
+            input.splice(i, 0, ',');
+        }
+        input=input.reverse().join('');
+    }
+    return input;
+}
 
 /* API FETCH REQUESTS */
 //  GET all
@@ -9,13 +29,30 @@ const getAll = async() => {
     await fetch(url)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        console.log(data);
         for (key in data) {
             let keyUp = key.charAt(0).toUpperCase() + key.slice(1);
             console.log(key, data[key])
             //   ADD ENVELOPES TO ENVELOPE SELECTION AREA
-            let enevelopeStr = '<div class="sample-envelope" onclick="clickEnvelope(\''+key+'\')">'+keyUp+'</div>'
+            if (data[key]%1) data[key] = data[key].toFixed(2);
+            let enevelopeStr = '<div class="sample-envelope" id="'+key+'" onclick="clickEnvelope(\''+key+'\')">'
+            +keyUp
+            +'<h5 class="preview-balance"> $'
+            +data[key]
+            +'</h5></div>';
             $('.envelope-selection-area').append(enevelopeStr)
+        };
+        totalBills = Object.values(data).reduce((a,b)=>a+b);
+        console.log('```````````````````` ' + totalBills)
+        if (totalBills%1) totalBills = totalBills.toFixed(2);
+        $('.total-bills').html(' ' + '<h2>' + '$'+totalBills + '</h2');
+        console.log('total: ' + totalBills);
+        let $overBudget = $('.over-budget');
+        if (income < totalBills) {
+            console.log('YOU BROKE!');
+            $overBudget.addClass('active');
+        } else if (income >= totalBills && $overBudget.hasClass('active')) {
+            $overBudget.removeClass('active');
         }
     })
     .catch(err=>{
@@ -42,10 +79,9 @@ const create = async() => {
     } else {
         let $bal = Number($('#starting-balance').val().split('$').join(''));
         let data = {};
-        data['envelope']=$name;
+        data['envelope']=$name.trim();
         data['amount']=$bal;
-        console.log(data)
-        ;
+        console.log(data);
         const response = await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -70,6 +106,7 @@ const credit = async() => {
     .then(res => console.log(res))
     $('#credit-amount').val('');
     findBal(selectedEnvelope);
+    getAll();
 }
 // PUT debit envelope
 const debit = async() => {
@@ -81,6 +118,7 @@ const debit = async() => {
     .then(res => console.log(res))
     $('#debit-amount').val('');
     findBal(selectedEnvelope);
+    getAll();
 }
 // POST transfer between envelopes
 const transfer = async() => {
@@ -94,6 +132,7 @@ const transfer = async() => {
     .then(res => console.log(res))
     $('#transfer-amount').val('');
     findBal(selectedEnvelope);
+    getAll();
 }
 // DELETE envelope
 const deleteEnvelope = async() => {
@@ -106,15 +145,27 @@ const deleteEnvelope = async() => {
     getAll();
 }
 /* END -- API FETCH REQUESTS */
+
 /* INPUT VALIDATION */
 // Function for adding "$" at beginning of number input when clicking on field
 const $moneys = $('.money');
 $('.money').on('focus', function(){
-    $(this).val('$');
+    if ($(this).val()==='') $(this).val('$');
+    // $(this).val('$');
 })
 // Function for removing "$" from beginning of number when clicking off of field
 $('.money').on('blur', function(){
     if ($(this).val()==='$') $(this).val('');
+    console.log('blur: '+ totalBills)
+    // totalBills = Object.values(data).reduce((a,b)=>a+b);
+    let income = Number($('#income-input').val().substring(1));
+    let $overBudget = $('.over-budget');
+    if (income < totalBills) {
+        console.log('YOU BROKE!');
+        $overBudget.addClass('active');
+    } else if (income >= totalBills && $overBudget.hasClass('active')) {
+        $overBudget.removeClass('active');
+    }
 })
 // Allowing only numbers and decimal point as input
 function isNumberKey(evt) {
@@ -194,7 +245,7 @@ function menuPopulate(){
     $('#from-dropdown').empty();
     $('#to-dropdown').empty();
     $('.sample-envelope').each(function(){
-        let cat = $(this).text();
+        let cat = $(this).attr('id'); 
         let inputStrFrom = '<a onclick="accountSelect(\''+cat+'\', \'from\')">' + cat + '</a>';
         let inputStrTo = '<a onclick="accountSelect(\''+cat+'\', \'to\')">' + cat + '</a>';
         $('#from-dropdown').append(inputStrFrom);
@@ -252,7 +303,14 @@ $('#transfer-amount').on("keyup", function(event) {
         event.preventDefault();
         $('button#transfer-submit').click();
     }
-});  
+});
+$('#income-input').on('keyup', function(event) {
+    let income = $(this).val();
+    if (income[0]==='$') income = income.substring(1);
+    income = Number(income);
+    console.log('income: ' + income, typeof income)
+    if ($(this).val()==='') $(this).val('$')
+}) 
 /* END -- EVENT LISTENERS */
 
 /* FUNCTION CALLS */

@@ -29,9 +29,15 @@
 
         <!-- INCOME INPUT SECTION -->
         <div class="income">
-            <h2 id="income">Monthly income:</h2>
-            <!-- KEYBOARD INPUT -->
-            <input class="money" id="income-input" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+            <div class="monthly-income">
+                <h2 id="income">Monthly income:</h2>
+                <!-- KEYBOARD INPUT -->
+                <input class="money" id="income-input" type="text" maxlength="9" onkeypress="return isNumberKey(event)" placeholder="$">
+            </div>
+            <div class="total-readout">
+                <h2>Total in Envelopes:</h2><span class="total-bills"></span>
+                <h5 class="over-budget">*Budgets should not exceed monthly income</h5>
+            </div>
         </div>
 
         <!-- ENVELOPE FLEX BOX -->

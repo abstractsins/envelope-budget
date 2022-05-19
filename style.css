@@ -21,8 +21,8 @@ body {
     /*  END CUSTOM COLORS */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     line-height: 1.5;
+    box-sizing: border-box;
 }
 
 body {
@@ -88,10 +88,46 @@ h4 {
 
 .income {
     display: flex;
+    flex-flow: column;
     justify-content: space-around;
     align-items: center;
     padding: 0 30px;
     margin-top: 10px;
+    width: 50%;
+}
+
+.monthly-income {
+    display: flex;
+    flex-flow: row;
+}
+
+.total-readout {
+    /* display: flex; */
+    margin: 10px;
+    justify-content: space-between;
+    width:  100%;
+    text-align: center;
+}
+
+.total-readout h2{
+    display: inline;
+}
+
+.total-bills {
+    /* font-size: 1.25em; */
+}
+
+.over-budget {
+    visibility: hidden;
+    color: red;
+}
+
+h5.over-budget {
+    font-size: 1.25em;
+}
+
+.over-budget.active {
+    visibility: visible;
 }
 
 input {
@@ -135,16 +171,16 @@ input:focus {
 }
 
 .sample-envelope {
+    box-sizing: content-box;
     background-color: var(--index-card-bg);
-    display: flex;
-    justify-content: center;
+    text-align: center;
     align-items: center;
     font-family: "Roboto Slab", Georgia, 'Times New Roman', Times, serif;
     font-size: 1.5em;
     border-radius: 15px;
     width: 150px;
-    height: 75px;
     margin: 15px;
+    padding: 7px;
     filter: var(--index-card-shadow-6);
     border: 5px solid var(--charcoal-2);
 }

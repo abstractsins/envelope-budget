@@ -46,7 +46,7 @@ envelopeRouter.param('action', (req,res,next,action)=>{
 // Listen in on server
 app.listen(PORT, function(err){
     if (err) console.log("Error in server setup");    
-    console.log(`psssst, I'm listening on port ${PORT}, be gentle...`);
+    console.log(`psssst, I'm listening on port ${PORT}, speak up...`);
 });
 
 // GET
@@ -71,7 +71,7 @@ envelopeRouter.put('/:category/:action/', (req,res,next)=>{
         res.send(updated);
         console.log(`\n*****Envelope updated - ${action} ${req.category}: ${req.query.amount}`)
     } else {
-        res.status(404).send('something went wrong')
+        res.status(404).send('something went wrong, Chief...')
     }
 })
 
